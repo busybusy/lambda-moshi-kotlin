@@ -12,7 +12,7 @@ abstract class ApiGatewayParsedBodyHandler<Body : Any> : ApiGatewayProxyHandler(
     private val bodyType: Type = supertypeArguments(ApiGatewayParsedBodyHandler::class)[0].javaType
     private val bodyAdapter: JsonAdapter<Body> by lazy { moshi.adapter<Body>(bodyType) }
 
-    abstract fun handle(event: APIGatewayProxyRequestEvent, body: Body, context: Context?): APIGatewayProxyResponseEvent
+    protected abstract fun handle(event: APIGatewayProxyRequestEvent, body: Body, context: Context?): APIGatewayProxyResponseEvent
 
     final override fun handle(event: APIGatewayProxyRequestEvent, context: Context?)
         = handle(event, bodyAdapter.fromJson(event.body)!!, context)
