@@ -1,9 +1,12 @@
 plugins {
+    maven
     kotlin("jvm")
 }
 
 dependencies {
     implementation(kotlin("stdlib"))
+    compile("com.squareup.moshi", "moshi-kotlin", "1.6.0")
+    compile("com.amazonaws", "aws-lambda-java-core", "1.2.0")
 }
 
 dependencies {
