@@ -12,7 +12,7 @@ import java.lang.reflect.Type
 import kotlin.reflect.jvm.javaType
 
 abstract class LambdaStreamHandler<Event : Any, Result : Any> : RequestStreamHandler {
-    val moshi: Moshi by lazy { createMoshiBuilder().build() }
+    protected val moshi: Moshi by lazy { createMoshiBuilder().build() }
 
     private inline val typeArguments get() = supertypeArguments(LambdaStreamHandler::class)
     private val eventType: Type = typeArguments[0].javaType
@@ -21,9 +21,9 @@ abstract class LambdaStreamHandler<Event : Any, Result : Any> : RequestStreamHan
     private val eventAdapter: JsonAdapter<Event> by lazy { moshi.adapter<Event>(eventType) }
     private val resultAdapter: JsonAdapter<Result> by lazy { moshi.adapter<Result>(resultType) }
 
-    abstract fun handle(event: Event, context: Context?): Result
+    protected abstract fun handle(event: Event, context: Context?): Result
 
-    open fun createMoshiBuilder(): Moshi.Builder = Moshi.Builder().apply {
+    protected open fun createMoshiBuilder(): Moshi.Builder = Moshi.Builder().apply {
         add(KotlinJsonAdapterFactory())
     }
 
