@@ -1,10 +1,12 @@
 plugins {
+    maven
     kotlin("jvm")
 }
 
 dependencies {
     implementation(kotlin("stdlib"))
     compile(project(":core"))
+    compile("com.amazonaws", "aws-lambda-java-events", "2.1.0")
 }
 
 dependencies {
