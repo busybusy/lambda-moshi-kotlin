@@ -5,4 +5,4 @@ import kotlin.reflect.KType
 import kotlin.reflect.full.allSupertypes
 import kotlin.reflect.jvm.jvmErasure
 
-fun Any.supertypeArguments(target: KClass<*>): List<KType> = this::class.allSupertypes.first { it.jvmErasure == target }.arguments.map { it.type!! }
+fun <T : Any> T.supertypeArguments(target: KClass<T>): List<KType> = this::class.allSupertypes.first { it.jvmErasure == target }.arguments.map { it.type!! }
